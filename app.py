@@ -462,11 +462,11 @@ with col_left:
     fig_bar.update_layout(
         margin=dict(l=0, r=40, t=10, b=10),
         xaxis=dict(range=[0, 110], showticklabels=False, showgrid=False, zeroline=False),
-        yaxis=dict(showgrid=False),
+        yaxis=dict(showgrid=False, tickfont=dict(color="#1a1a1a", size=13)),
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         height=200,
-        font=dict(family="DM Sans", size=13),
+        font=dict(family="DM Sans", size=13, color="#1a1a1a"),
         showlegend=False,
     )
     st.plotly_chart(fig_bar, use_container_width=True, config={"displayModeBar": False})
@@ -535,7 +535,7 @@ with col_mid:
         margin=dict(l=20, r=20, t=20, b=10),
         height=200,
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="DM Sans"),
+        font=dict(family="DM Sans", color="#1a1a1a"),
     )
     st.plotly_chart(fig_gauge, use_container_width=True, config={"displayModeBar": False})
 
