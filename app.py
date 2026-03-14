@@ -207,39 +207,12 @@ MODEL_PATH = os.path.join("model", "banana_pipeline.joblib")
 @st.cache_resource(show_spinner="Loading quality model…")
 def load_model():
     if not os.path.exists(MODEL_PATH):
-        # Auto-train if model doesn't exist (needed for cloud deployment)
         import train_model as tm
         df_raw       = tm.load_data(tm.DATA_PATH)
         df_processed = tm.engineer_features(df_raw)
         pipeline, num_feats, cat_feats = tm.train_and_evaluate(df_processed)
         tm.save_pipeline(pipeline, num_feats, cat_feats)
     return joblib.load(MODEL_PATH)
-
-
-Save the file, then go back to GitHub, click on `app.py` → click the **pencil icon** to edit → paste the updated function → click **Commit changes**.
-
----
-
-## Step 4 — Deploy on Streamlit Cloud
-
-1. Go to **share.streamlit.io**
-2. Click **Sign in with GitHub** and authorize it
-3. Click **New app**
-4. Fill in:
-   - **Repository:** `yourname/banana-app`
-   - **Branch:** `main`
-   - **Main file path:** `app.py`
-5. Click **Deploy**
-
-It will take about 2–3 minutes to install packages and launch. When it's done you'll see a green **Your app is live** message.
-
----
-
-## Step 5 — Share the link
-
-You'll get a link like:
-
-https://yourname-banana-app.streamlit.app
 
 artefact = load_model()
 pipeline             = artefact["pipeline"]
