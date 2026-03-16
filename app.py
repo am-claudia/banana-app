@@ -376,14 +376,27 @@ input_df = engineer_features_for_inference(raw_inputs)
 expected_cols = numeric_features + categorical_features
 input_df = input_df.reindex(columns=expected_cols)
 
-# Run prediction
-proba_array   = pipeline.predict_proba(input_df)[0]
-predicted_idx = int(np.argmax(proba_array))
-predicted_cls = classes[predicted_idx]
-predicted_prob = float(proba_array[predicted_idx])
+# Run prediction only when button is pressed, otherwise use last stored result
+if predict_btn:
+    proba_array   = pipeline.predict_proba(input_df)[0]
+    predicted_idx = int(np.argmax(proba_array))
+    predicted_cls = classes[predicted_idx]
+    predicted_prob = float(proba_array[predicted_idx])
+    st.session_state["last_proba"]   = proba_array
+    st.session_state["last_class"]   = predicted_cls
+    st.session_state["last_prob"]    = predicted_prob
+    st.session_state["last_inputs"]  = raw_inputs
+    st.session_state["has_result"]   = True
 
+if not st.session_state.get("has_result", False):
+    st.info("👈 Set the banana parameters in the sidebar and press **Run Quality Prediction** to see results.", icon="🍌")
+    st.stop()
+
+proba_array   = st.session_state["last_proba"]
+predicted_cls = st.session_state["last_class"]
+predicted_prob = st.session_state["last_prob"]
 meta = get_quality_meta(predicted_cls)
-warnings_list = validate_inputs(raw_inputs)
+warnings_list = validate_inputs(st.session_state["last_inputs"])
 
 
 # ── Main content — three columns ──────────────────────────────────────────────
@@ -632,7 +645,7 @@ with col_right:
 
 # ── Save to history on button press ──────────────────────────────────────────
 
-if predict_btn:
+if predict_btn and st.session_state.get("has_result", False):
     record = {
         "Timestamp":  datetime.datetime.now().strftime("%H:%M:%S"),
         "Variety":    variety,
