@@ -235,7 +235,7 @@ st.markdown("""
   <h1>🍌 Banana Quality Inspector</h1>
   <p>
     AI-powered batch grading for quality inspectors &nbsp;|&nbsp;
-    Gradient Boosting classifier &nbsp;·&nbsp; 4-class multiclass &nbsp;·&nbsp;
+    Gradient Boosting classifier &nbsp;·&nbsp; best of 5 models tested &nbsp;·&nbsp;
     ~91 % cross-validated accuracy
   </p>
 </div>
