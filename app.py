@@ -554,7 +554,7 @@ with col_mid:
     summary_items = [
         ("Variety",         variety),
         ("Region",          region),
-        ("Ripeness Index",  f"{ripeness_index:.2f}  ({ripe_cat})"),
+        ("Ripeness Index",  f"{ripeness_index:.2f}"),
         ("Sugar (Brix°)",   f"{sugar_content_brix:.1f}"),
         ("Firmness (kgf)",  f"{firmness_kgf:.2f}"),
         ("Length × Weight", f"{length_cm:.1f} cm  ×  {weight_g:.0f} g"),
