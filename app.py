@@ -58,7 +58,10 @@ html, body, [class*="css"] {
 .stApp {
     background: #fffdf7;
 }
-
+/* ── Warning text colour fix ── */
+.stAlert p {
+    color: #333333 !important;
+}
 /* ── Top header banner ── */
 .bqi-header {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
