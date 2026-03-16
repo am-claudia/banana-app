@@ -259,10 +259,6 @@ with st.sidebar:
         min_value=1.0, max_value=7.0, value=4.1, step=0.05,
     )
 
-    # Derive the ripeness category label automatically
-    ripe_cat = ripeness_index_to_category(ripeness_index)
-    st.caption(f"📍 Inferred ripeness stage: **{ripe_cat}**")
-
     sugar_content_brix = st.slider(
         "Sugar Content (Brix °)",
         min_value=15.0, max_value=22.0, value=18.5, step=0.1,
@@ -355,7 +351,6 @@ with st.sidebar:
 
 raw_inputs = {
     "ripeness_index":      ripeness_index,
-    "ripeness_category":   ripe_cat,
     "sugar_content_brix":  sugar_content_brix,
     "firmness_kgf":        firmness_kgf,
     "length_cm":           length_cm,
