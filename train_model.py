@@ -44,7 +44,7 @@ MODEL_PATH = os.path.join(MODEL_DIR, "banana_pipeline.joblib")
 TARGET_COL = "quality_category"
 
 # Columns to drop before modelling (leakage / identifier / raw date)
-DROP_COLS  = ["sample_id", "quality_score", "harvest_date"]
+DROP_COLS  = ["sample_id", "quality_score", "harvest_date", "ripeness_category"]
 
 # ── 2. Load data ──────────────────────────────────────────────────────────────
 
@@ -80,7 +80,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df["sugar_ripeness_ratio"] = df["sugar_content_brix"] / (df["ripeness_index"] + 1e-6)
     df["size_index"]           = df["weight_g"] / (df["length_cm"] + 1e-6)
 
-    # Drop columns not used in modelling
+# Drop columns not used in modelling
     df = df.drop(columns=DROP_COLS)
 
     return df
